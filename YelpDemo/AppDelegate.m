@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "YelpHomeViewController.h"
 
 @implementation AppDelegate
 
@@ -14,6 +15,27 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:2 * 1024 * 1024
+                                                            diskCapacity:100 * 1024 * 1024
+                                                                diskPath:nil];
+    [NSURLCache setSharedURLCache:sharedCache];
+    YelpHomeViewController *homePageViewController = [[YelpHomeViewController alloc] init];
+    UINavigationController *yelpNavController = [[UINavigationController alloc] initWithRootViewController:homePageViewController];
+    
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
+    shadow.shadowOffset = CGSizeMake(0, 1);
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                           shadow, NSShadowAttributeName,
+                                                           [UIFont fontWithName:@"HelveticaNeue" size:15.0], NSFontAttributeName, nil]];
+    //[[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+
+    [[UINavigationBar appearance] setBarTintColor:[[UIColor alloc] initWithRed:1.0 green:0.0 blue:0.0 alpha:0.8]];
+   
+    self.window.rootViewController = yelpNavController;
+    
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
