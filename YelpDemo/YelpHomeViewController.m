@@ -12,6 +12,7 @@
 #import "BusinessCategory.h"
 #import "Business.h"
 #import "BusinessTableViewCell.h"
+#import "FilterViewController.h"
 
 NSString * const kYelpConsumerKey = @"vxKwwcR_NMQ7WaEiQBK_CA";
 NSString * const kYelpConsumerSecret = @"33QCvh5bIF5jIHR5klQr7RtBDhQ";
@@ -128,11 +129,13 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 }
 - (IBAction)gotoFilterView:(UIButton *)sender {
     NSLog(@"Filter button clicked!");
+    FilterViewController *filtervc = [[FilterViewController alloc] init];
+    [self.navigationController pushViewController:filtervc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 140.0;
+    return 115.0;
     
 }
 

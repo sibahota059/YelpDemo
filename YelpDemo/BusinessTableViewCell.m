@@ -40,17 +40,24 @@
     self = [super init];
     
     [self.businessImageView setImageWithURL:[NSURL URLWithString:business.photoURL]];
-    NSString *businessName = [NSMutableString stringWithFormat:@"%d . %@",index+1, business.name];
+
+    NSString *businessName = [NSMutableString stringWithFormat:@"%d. %@",index+1, business.name];
     self.businessName.text = businessName;
     [self.ratingsImageView setImageWithURL:[NSURL URLWithString:business.ratingImageURL]];
     
     NSMutableString *reviews = [NSMutableString stringWithFormat:@"%d reviews",business.reviewCount];
     self.reviewsLabel.text = reviews;
     
-    NSMutableString *address = [NSMutableString stringWithString:business.location.displayAddress.addressLineOne];
-    [address appendString:@", "];
-    if(business.location.displayAddress.addressLineTwo){
-        [address appendString:business.location.displayAddress.addressLineTwo];
+    NSMutableString *address;
+    if(business.location.displayAddress.addressLineOne){
+        address = [NSMutableString stringWithString:business.location.displayAddress.addressLineOne];
+        [address appendString:@", "];
+        
+        if(business.location.displayAddress.addressLineTwo){
+            [address appendString:business.location.displayAddress.addressLineTwo];
+        }
+    }else{
+        address = [NSMutableString stringWithString:business.location.address.addressLineOne];
     }
     
     self.addressLabel.text = address;

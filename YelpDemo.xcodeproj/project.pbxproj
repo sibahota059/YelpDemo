@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		47B2F02A2A1A4E23AB85B397 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 384D3D2B01CD4C36885FE3DF /* libPods.a */; };
+		CC20ED4719555BE900323FBC /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC20ED4519555BE900323FBC /* FilterViewController.m */; };
+		CC20ED4819555BE900323FBC /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC20ED4619555BE900323FBC /* FilterViewController.xib */; };
 		CC2182C01952796B00918366 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182BF1952796B00918366 /* Foundation.framework */; };
 		CC2182C21952796B00918366 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182C11952796B00918366 /* CoreGraphics.framework */; };
 		CC2182C41952796B00918366 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182C31952796B00918366 /* UIKit.framework */; };
@@ -48,6 +50,9 @@
 
 /* Begin PBXFileReference section */
 		384D3D2B01CD4C36885FE3DF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC20ED4419555BE900323FBC /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		CC20ED4519555BE900323FBC /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		CC20ED4619555BE900323FBC /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
 		CC2182BC1952796B00918366 /* YelpDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YelpDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2182BF1952796B00918366 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CC2182C11952796B00918366 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -165,6 +170,9 @@
 				CC2182F119527B0D00918366 /* YelpHomeViewController.m */,
 				CC2183111953EF0B00918366 /* BusinessTableViewCell.h */,
 				CC2183121953EF0B00918366 /* BusinessTableViewCell.m */,
+				CC20ED4419555BE900323FBC /* FilterViewController.h */,
+				CC20ED4519555BE900323FBC /* FilterViewController.m */,
+				CC20ED4619555BE900323FBC /* FilterViewController.xib */,
 				CC2183131953EF0B00918366 /* BusinessTableViewCell.xib */,
 				CC2182F219527B0D00918366 /* YelpHomeViewController.xib */,
 			);
@@ -300,6 +308,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC20ED4819555BE900323FBC /* FilterViewController.xib in Resources */,
 				CC2182F419527B0D00918366 /* YelpHomeViewController.xib in Resources */,
 				CC2183151953EF0B00918366 /* BusinessTableViewCell.xib in Resources */,
 				CC2182CA1952796B00918366 /* InfoPlist.strings in Resources */,
@@ -359,6 +368,7 @@
 				CC21830119528B9100918366 /* Location.m in Sources */,
 				CC2182F7195282BD00918366 /* YelpClient.m in Sources */,
 				CC21830D1953DFB600918366 /* BusinessCategory.m in Sources */,
+				CC20ED4719555BE900323FBC /* FilterViewController.m in Sources */,
 				CC218307195290EE00918366 /* Span.m in Sources */,
 				CC21830A1952910200918366 /* Center.m in Sources */,
 				CC2183101953E62D00918366 /* Address.m in Sources */,
