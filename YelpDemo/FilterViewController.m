@@ -66,6 +66,32 @@
     
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyIdentifier"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MyIdentifier"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView {
+    // Return the number of sections.
+    return 5;
+}
+
+- (NSInteger) titleForHeaderInSection:(UITableView *)aTableView {
+    // Return the number of sections.
+    return 5;
+}
+
+- (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    return 10;
+}
+
 - (IBAction)cancelActionPerformed:(UIButton *)sender {
     
     NSLog(@"cancel button clicked!");
