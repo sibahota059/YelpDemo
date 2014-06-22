@@ -31,10 +31,15 @@
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c9I-2L-Xfa">
+                        <rect key="frame" x="231" y="2" width="37" height="36"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="filterTypeLabel" destination="zlC-zJ-3uQ" id="j0d-pW-U1i"/>
+                <outlet property="radioButtonImageView" destination="c9I-2L-Xfa" id="Wca-QO-2WA"/>
                 <outlet property="switchControl" destination="ckX-N0-dcL" id="uvH-gK-vox"/>
                 <outlet property="timeLabel" destination="C1w-Cd-Lir" id="4G6-rZ-omv"/>
             </connections>

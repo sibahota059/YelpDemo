@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *filterTypeLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *switchControl;
+@property (weak, nonatomic) IBOutlet UIImageView *radioButtonImageView;
 
 @end

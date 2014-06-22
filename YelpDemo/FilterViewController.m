@@ -47,6 +47,8 @@
     
     [self.sectionStatus setObject:@"collapsed" forKey:@"2"];
     [self.sectionStatus setObject:@"collapsed" forKey:@"3"];
+    [self.sectionStatus setObject:@"selectedSortBy" forKey:@"-1"];
+    [self.sectionStatus setObject:@"selectedDistance" forKey:@"-1"];
     
     //[self.filterTableView reloadData];
 
@@ -110,9 +112,10 @@
                 cell.timeLabel.text = [dateFormatter stringFromDate:currTime];
                 [cell.timeLabel.layer setBorderColor:[UIColor grayColor].CGColor];
                 [cell.timeLabel.layer setBorderWidth:0.5f];
-                
                 [cell.switchControl setOn:NO animated:NO];
                 [cell.switchControl setTag:10];
+                
+                cell.radioButtonImageView.hidden = YES;
                
             }
                 break;
@@ -121,9 +124,10 @@
             {
                 cell.filterTypeLabel.text = @"Hot & New";
                 cell.timeLabel.hidden = YES;
-                
                 [cell.switchControl setOn:NO animated:NO];
                 [cell.switchControl setTag:11];
+                
+                cell.radioButtonImageView.hidden = YES;
             }
                 break;
 
@@ -131,9 +135,10 @@
             {
                 cell.filterTypeLabel.text = @"Offering a Deal";
                 cell.timeLabel.hidden = YES;
-                
                 [cell.switchControl setOn:NO animated:NO];
                 [cell.switchControl setTag:12];
+                
+                cell.radioButtonImageView.hidden = YES;
             }
                 break;
                 
@@ -141,9 +146,10 @@
             {
                 cell.filterTypeLabel.text = @"Delivery";
                 cell.timeLabel.hidden = YES;
-                
                 [cell.switchControl setOn:NO animated:NO];
                 [cell.switchControl setTag:13];
+                
+                cell.radioButtonImageView.hidden = YES;
             }
                 break;
                 
@@ -157,8 +163,10 @@
         
         FilterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterTableViewCell"];
         
-        [cell.switchControl addTarget:self
-                               action:@selector(switchControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(distanceTapped:)];
+        singleTap.numberOfTapsRequired = 1;
+        singleTap.numberOfTouchesRequired = 1;
+        
         
         switch (indexPath.row) {
                 
@@ -166,8 +174,16 @@
             {
                 cell.filterTypeLabel.text = @"Auto";
                 cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:20];
+                cell.switchControl.hidden = YES;
+                cell.radioButtonImageView.hidden = NO;
+                if([[self.sectionStatus objectForKey:@"selectedDistance"] isEqualToString:[NSString stringWithFormat:@"%d",20]]){
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                }else{
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                }
+                [cell.radioButtonImageView setTag:20];
             }
                 break;
                 
@@ -175,8 +191,18 @@
             {
                 cell.filterTypeLabel.text = @"0.3 miles";
                 cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:21];
+                cell.switchControl.hidden = YES;
+                cell.radioButtonImageView.hidden = NO;
+                if([[self.sectionStatus objectForKey:@"selectedDistance"] isEqualToString:[NSString stringWithFormat:@"%d",21]]){
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                }else{
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                }
+                [cell.radioButtonImageView setTag:21];
+                [cell.radioButtonImageView addGestureRecognizer:singleTap];
+                [cell.radioButtonImageView setUserInteractionEnabled:YES];
             }
                 break;
                 
@@ -184,8 +210,18 @@
             {
                 cell.filterTypeLabel.text = @"1 mile";
                 cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:22];
+                cell.switchControl.hidden = YES;
+                cell.radioButtonImageView.hidden = NO;
+                if([[self.sectionStatus objectForKey:@"selectedDistance"] isEqualToString:[NSString stringWithFormat:@"%d",22]]){
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                }else{
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                }
+                [cell.radioButtonImageView setTag:22];
+                [cell.radioButtonImageView addGestureRecognizer:singleTap];
+                [cell.radioButtonImageView setUserInteractionEnabled:YES];
             }
                 break;
                 
@@ -193,8 +229,18 @@
             {
                 cell.filterTypeLabel.text = @"5 miles";
                 cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:23];
+                cell.switchControl.hidden = YES;
+                cell.radioButtonImageView.hidden = NO;
+                if([[self.sectionStatus objectForKey:@"selectedDistance"] isEqualToString:[NSString stringWithFormat:@"%d",23]]){
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                }else{
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                }
+                [cell.radioButtonImageView setTag:23];
+                [cell.radioButtonImageView addGestureRecognizer:singleTap];
+                [cell.radioButtonImageView setUserInteractionEnabled:YES];
             }
                 break;
             
@@ -202,8 +248,17 @@
             {
                 cell.filterTypeLabel.text = @"20 miles";
                 cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:24];
+                cell.switchControl.hidden = YES;
+                cell.radioButtonImageView.hidden = NO;
+                if([[self.sectionStatus objectForKey:@"selectedDistance"] isEqualToString:[NSString stringWithFormat:@"%d",24]]){
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                }else{
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                }
+                [cell.radioButtonImageView setTag:24];
+                
             }
                 break;
                 
@@ -216,8 +271,50 @@
     }else if(indexPath.section == 3){
         
         FilterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterTableViewCell"];
-        [cell.switchControl addTarget:self
-                               action:@selector(switchControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+        
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sortByTapped:)];
+        
+        singleTap.numberOfTapsRequired = 1;
+        singleTap.numberOfTouchesRequired = 1;
+        
+        NSLog(@"there there.. %@", [self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]]);
+        
+        if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]] isEqualToString:@"collapsed"]){
+            
+            cell.timeLabel.hidden = YES;
+            cell.switchControl.hidden = YES;
+            cell.radioButtonImageView.hidden = NO;
+            
+            switch ([[self.sectionStatus objectForKey:@"selectedSortBy"] integerValue]) {
+                case 30:
+                    cell.filterTypeLabel.text = @"Best Match";
+                    [cell.radioButtonImageView setTag:30];
+                    break;
+                case 31:
+                    cell.filterTypeLabel.text = @"Distance";
+                    [cell.radioButtonImageView setTag:31];
+                    break;
+                case 32:
+                    cell.filterTypeLabel.text = @"Rating";
+                    [cell.radioButtonImageView setTag:32];
+                    break;
+                case 33:
+                    cell.filterTypeLabel.text = @"Most Reviewed";
+                    [cell.radioButtonImageView setTag:33];
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            cell.radioButtonImageView.image = [UIImage imageNamed:@"triangle.png"];
+            //[cell.radioButtonImageView addGestureRecognizer:singleTap];
+            //[cell.radioButtonImageView setUserInteractionEnabled:YES];
+            
+            
+        }else{
+            NSLog(@"move switch here..");
+        }
         
         switch (indexPath.row) {
                 
@@ -225,8 +322,19 @@
             {
                 cell.filterTypeLabel.text = @"Best Match";
                 cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:30];
+                cell.switchControl.hidden = YES;
+                cell.radioButtonImageView.hidden = NO;
+                if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",30]]){
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                }else{
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                }
+                
+                [cell.radioButtonImageView setTag:30];
+                [cell.radioButtonImageView addGestureRecognizer:singleTap];
+                [cell.radioButtonImageView setUserInteractionEnabled:YES];
             }
                 break;
                 
@@ -234,8 +342,18 @@
             {
                 cell.filterTypeLabel.text = @"Distance";
                 cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:31];
+                cell.switchControl.hidden = YES;
+                cell.radioButtonImageView.hidden = NO;
+                if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",31]]){
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                }else{
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                }
+                [cell.radioButtonImageView setTag:31];
+                [cell.radioButtonImageView addGestureRecognizer:singleTap];
+                [cell.radioButtonImageView setUserInteractionEnabled:YES];
             }
                 break;
                 
@@ -243,8 +361,18 @@
             {
                 cell.filterTypeLabel.text = @"Rating";
                 cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:32];
+                cell.switchControl.hidden = YES;
+                cell.radioButtonImageView.hidden = NO;
+                if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",32]]){
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                }else{
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                }
+                [cell.radioButtonImageView setTag:32];
+                [cell.radioButtonImageView addGestureRecognizer:singleTap];
+                [cell.radioButtonImageView setUserInteractionEnabled:YES];
             }
                 break;
                 
@@ -252,8 +380,19 @@
             {
                 cell.filterTypeLabel.text = @"Most Reviewed";
                 cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:33];
+                cell.switchControl.hidden = YES;
+                cell.radioButtonImageView.hidden = NO;
+                if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",33]]){
+                    
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                }else{
+                
+                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                }
+                
+                [cell.radioButtonImageView setTag:33];
+                [cell.radioButtonImageView addGestureRecognizer:singleTap];
+                [cell.radioButtonImageView setUserInteractionEnabled:YES];
             }
                 break;
                 
@@ -276,7 +415,8 @@
                 cell.filterTypeLabel.text = @"Take-out";
                 cell.timeLabel.hidden = YES;
                 [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:30];
+                [cell.switchControl setTag:40];
+                cell.radioButtonImageView.hidden = YES;
             }
                 break;
                 
@@ -285,7 +425,8 @@
                 cell.filterTypeLabel.text = @"Good for Groups";
                 cell.timeLabel.hidden = YES;
                 [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:31];
+                [cell.switchControl setTag:41];
+                cell.radioButtonImageView.hidden = YES;
             }
                 break;
                 
@@ -294,7 +435,8 @@
                 cell.filterTypeLabel.text = @"Takes Reservations";
                 cell.timeLabel.hidden = YES;
                 [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:32];
+                [cell.switchControl setTag:42];
+                cell.radioButtonImageView.hidden = YES;
             }
                 break;
                 
@@ -308,6 +450,67 @@
    
 }
 
+- (void)distanceTapped :(UIGestureRecognizer *)gestureRecognizer {
+
+    UIImageView *selectedView = (UIImageView*)[gestureRecognizer view];
+    int row = [selectedView tag] % 10;
+    
+    switch (row) {
+        case 0:
+            NSLog(@"Auto");//16100 - 10 miles?
+            break;
+        case 1:
+            NSLog(@"0.3 mile");//20
+            break;
+        case 2:
+            NSLog(@"1 mile");//1610
+            break;
+        case 3:
+            NSLog(@"5 miles");//8047
+            break;
+        case 4:
+            NSLog(@"20 miles");//32187
+            break;
+        default:
+            break;
+    }
+    
+    [self.sectionStatus setObject:[NSString stringWithFormat:@"%d",[selectedView tag]] forKey:@"selectedDistance"];
+    [self.sectionStatus setObject:@"collapsed" forKey:[NSString stringWithFormat:@"%d",[selectedView tag] / 10]];
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[selectedView tag] / 10];
+    [self.filterTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+}
+
+- (void) sortByTapped :(UIGestureRecognizer *)gestureRecognizer {
+    
+    UIImageView *selectedView = (UIImageView*)[gestureRecognizer view];
+    int row = [selectedView tag] % 10;
+    
+    switch (row) {
+        case 0:
+            NSLog(@"best match");
+            break;
+        case 1:
+            NSLog(@"distance");
+            break;
+        case 2:
+            NSLog(@"rating");
+            break;
+        case 3:
+            NSLog(@"most reviewed");
+            break;
+        default:
+            break;
+    }
+    
+        [self.sectionStatus setObject:[NSString stringWithFormat:@"%d",[selectedView tag]] forKey:@"selectedSortBy"];
+        [self.sectionStatus setObject:@"collapsed" forKey:[NSString stringWithFormat:@"%d",[selectedView tag] / 10]];
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[selectedView tag] / 10];
+        [self.filterTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -315,11 +518,14 @@
     if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]] isEqualToString:@"collapsed"]){
         
         [self.sectionStatus setObject:@"expanded" forKey:[NSString stringWithFormat:@"%d",indexPath.section]];
+       
+    }else{
         
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
-        
-        [self.filterTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.sectionStatus setObject:@"collapsed" forKey:[NSString stringWithFormat:@"%d",indexPath.section]];
     }
+    
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
+    [self.filterTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
     
 }
 
@@ -329,7 +535,7 @@
         
         int selectedTag = [sender tag];
         
-        NSLog(@"selected tag value: %d", selectedTag);
+        //NSLog(@"selected tag value: %d", selectedTag);
         
         int section = selectedTag / 10;
         int row = selectedTag % 10;
@@ -412,7 +618,7 @@
         if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",section]] isEqualToString:@"collapsed"]){
             return 1;
         }else{
-            NSLog(@"current status: %@", [self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",section]]);
+            //NSLog(@"current status: %@", [self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",section]]);
             return 5;
         }
     } else if (section==3) {
