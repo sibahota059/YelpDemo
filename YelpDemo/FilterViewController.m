@@ -167,6 +167,44 @@
         singleTap.numberOfTapsRequired = 1;
         singleTap.numberOfTouchesRequired = 1;
         
+        if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]] isEqualToString:@"collapsed"]){
+            
+            cell.timeLabel.hidden = YES;
+            cell.switchControl.hidden = YES;
+            cell.radioButtonImageView.hidden = NO;
+            
+            switch ([[self.sectionStatus objectForKey:@"selectedDistance"] integerValue]) {
+                case 20:
+                    cell.filterTypeLabel.text = @"Auto";
+                    [cell.radioButtonImageView setTag:20];
+                    break;
+                case 21:
+                    cell.filterTypeLabel.text = @"0.3 mile";
+                    [cell.radioButtonImageView setTag:21];
+                    break;
+                case 22:
+                    cell.filterTypeLabel.text = @"1 mile";
+                    [cell.radioButtonImageView setTag:22];
+                    break;
+                case 23:
+                    cell.filterTypeLabel.text = @"5 miles";
+                    [cell.radioButtonImageView setTag:23];
+                    break;
+                case 24:
+                    cell.filterTypeLabel.text = @"20 miles";
+                    [cell.radioButtonImageView setTag:24];
+                    break;
+                default:
+                    break;
+            }
+            
+            cell.radioButtonImageView.image = [UIImage imageNamed:@"triangle.png"];
+            //[cell.radioButtonImageView addGestureRecognizer:singleTap];
+            //[cell.radioButtonImageView setUserInteractionEnabled:YES];
+            
+            
+        }else{
+        
         
         switch (indexPath.row) {
                 
@@ -264,8 +302,8 @@
                 
             default:
                 break;
+            }
         }
-        
         return cell;
         
     }else if(indexPath.section == 3){
@@ -276,8 +314,6 @@
         
         singleTap.numberOfTapsRequired = 1;
         singleTap.numberOfTouchesRequired = 1;
-        
-        NSLog(@"there there.. %@", [self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]]);
         
         if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]] isEqualToString:@"collapsed"]){
             
@@ -313,92 +349,92 @@
             
             
         }else{
-            NSLog(@"move switch here..");
+            switch (indexPath.row) {
+                    
+                case 0:
+                {
+                    cell.filterTypeLabel.text = @"Best Match";
+                    cell.timeLabel.hidden = YES;
+                    cell.switchControl.hidden = YES;
+                    cell.radioButtonImageView.hidden = NO;
+                    if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",30]]){
+                        
+                        cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                    }else{
+                        
+                        cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                    }
+                    
+                    [cell.radioButtonImageView setTag:30];
+                    [cell.radioButtonImageView addGestureRecognizer:singleTap];
+                    [cell.radioButtonImageView setUserInteractionEnabled:YES];
+                }
+                    break;
+                    
+                case 1:
+                {
+                    cell.filterTypeLabel.text = @"Distance";
+                    cell.timeLabel.hidden = YES;
+                    cell.switchControl.hidden = YES;
+                    cell.radioButtonImageView.hidden = NO;
+                    if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",31]]){
+                        
+                        cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                    }else{
+                        
+                        cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                    }
+                    [cell.radioButtonImageView setTag:31];
+                    [cell.radioButtonImageView addGestureRecognizer:singleTap];
+                    [cell.radioButtonImageView setUserInteractionEnabled:YES];
+                }
+                    break;
+                    
+                case 2:
+                {
+                    cell.filterTypeLabel.text = @"Rating";
+                    cell.timeLabel.hidden = YES;
+                    cell.switchControl.hidden = YES;
+                    cell.radioButtonImageView.hidden = NO;
+                    if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",32]]){
+                        
+                        cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                    }else{
+                        
+                        cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                    }
+                    [cell.radioButtonImageView setTag:32];
+                    [cell.radioButtonImageView addGestureRecognizer:singleTap];
+                    [cell.radioButtonImageView setUserInteractionEnabled:YES];
+                }
+                    break;
+                    
+                case 3:
+                {
+                    cell.filterTypeLabel.text = @"Most Reviewed";
+                    cell.timeLabel.hidden = YES;
+                    cell.switchControl.hidden = YES;
+                    cell.radioButtonImageView.hidden = NO;
+                    if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",33]]){
+                        
+                        cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
+                    }else{
+                        
+                        cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
+                    }
+                    
+                    [cell.radioButtonImageView setTag:33];
+                    [cell.radioButtonImageView addGestureRecognizer:singleTap];
+                    [cell.radioButtonImageView setUserInteractionEnabled:YES];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
         }
         
-        switch (indexPath.row) {
-                
-            case 0:
-            {
-                cell.filterTypeLabel.text = @"Best Match";
-                cell.timeLabel.hidden = YES;
-                cell.switchControl.hidden = YES;
-                cell.radioButtonImageView.hidden = NO;
-                if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",30]]){
-                    
-                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
-                }else{
-                    
-                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
-                }
-                
-                [cell.radioButtonImageView setTag:30];
-                [cell.radioButtonImageView addGestureRecognizer:singleTap];
-                [cell.radioButtonImageView setUserInteractionEnabled:YES];
-            }
-                break;
-                
-            case 1:
-            {
-                cell.filterTypeLabel.text = @"Distance";
-                cell.timeLabel.hidden = YES;
-                cell.switchControl.hidden = YES;
-                cell.radioButtonImageView.hidden = NO;
-                if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",31]]){
-                    
-                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
-                }else{
-                    
-                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
-                }
-                [cell.radioButtonImageView setTag:31];
-                [cell.radioButtonImageView addGestureRecognizer:singleTap];
-                [cell.radioButtonImageView setUserInteractionEnabled:YES];
-            }
-                break;
-                
-            case 2:
-            {
-                cell.filterTypeLabel.text = @"Rating";
-                cell.timeLabel.hidden = YES;
-                cell.switchControl.hidden = YES;
-                cell.radioButtonImageView.hidden = NO;
-                if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",32]]){
-                    
-                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
-                }else{
-                    
-                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
-                }
-                [cell.radioButtonImageView setTag:32];
-                [cell.radioButtonImageView addGestureRecognizer:singleTap];
-                [cell.radioButtonImageView setUserInteractionEnabled:YES];
-            }
-                break;
-                
-            case 3:
-            {
-                cell.filterTypeLabel.text = @"Most Reviewed";
-                cell.timeLabel.hidden = YES;
-                cell.switchControl.hidden = YES;
-                cell.radioButtonImageView.hidden = NO;
-                if([[self.sectionStatus objectForKey:@"selectedSortBy"] isEqualToString:[NSString stringWithFormat:@"%d",33]]){
-                    
-                    cell.radioButtonImageView.image = [UIImage imageNamed:@"checked.png"];
-                }else{
-                
-                    cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
-                }
-                
-                [cell.radioButtonImageView setTag:33];
-                [cell.radioButtonImageView addGestureRecognizer:singleTap];
-                [cell.radioButtonImageView setUserInteractionEnabled:YES];
-            }
-                break;
-                
-            default:
-                break;
-        }
+        
         
         return cell;
         
