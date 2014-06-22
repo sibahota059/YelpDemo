@@ -12,6 +12,8 @@
 		CC20ED4819555BE900323FBC /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC20ED4619555BE900323FBC /* FilterViewController.xib */; };
 		CC20ED4C1956439300323FBC /* FilterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC20ED4A1956439300323FBC /* FilterTableViewCell.m */; };
 		CC20ED4D1956439300323FBC /* FilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC20ED4B1956439300323FBC /* FilterTableViewCell.xib */; };
+		CC20ED5119567CE700323FBC /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = CC20ED4F19567CE700323FBC /* checked.png */; };
+		CC20ED5219567CE700323FBC /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = CC20ED5019567CE700323FBC /* unchecked.png */; };
 		CC2182C01952796B00918366 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182BF1952796B00918366 /* Foundation.framework */; };
 		CC2182C21952796B00918366 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182C11952796B00918366 /* CoreGraphics.framework */; };
 		CC2182C41952796B00918366 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182C31952796B00918366 /* UIKit.framework */; };
@@ -58,6 +60,8 @@
 		CC20ED491956439300323FBC /* FilterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterTableViewCell.h; sourceTree = "<group>"; };
 		CC20ED4A1956439300323FBC /* FilterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterTableViewCell.m; sourceTree = "<group>"; };
 		CC20ED4B1956439300323FBC /* FilterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterTableViewCell.xib; sourceTree = "<group>"; };
+		CC20ED4F19567CE700323FBC /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
+		CC20ED5019567CE700323FBC /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
 		CC2182BC1952796B00918366 /* YelpDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YelpDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2182BF1952796B00918366 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CC2182C11952796B00918366 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -128,9 +132,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC20ED4E19567CE700323FBC /* images */ = {
+			isa = PBXGroup;
+			children = (
+				CC20ED4F19567CE700323FBC /* checked.png */,
+				CC20ED5019567CE700323FBC /* unchecked.png */,
+			);
+			name = images;
+			path = YelpDemo/images;
+			sourceTree = "<group>";
+		};
 		CC2182B31952796B00918366 = {
 			isa = PBXGroup;
 			children = (
+				CC20ED4E19567CE700323FBC /* images */,
 				CC2182C51952796B00918366 /* YelpDemo */,
 				CC2182DE1952796C00918366 /* YelpDemoTests */,
 				CC2182BE1952796B00918366 /* Frameworks */,
@@ -318,8 +333,10 @@
 			files = (
 				CC20ED4819555BE900323FBC /* FilterViewController.xib in Resources */,
 				CC20ED4D1956439300323FBC /* FilterTableViewCell.xib in Resources */,
+				CC20ED5219567CE700323FBC /* unchecked.png in Resources */,
 				CC2182F419527B0D00918366 /* YelpHomeViewController.xib in Resources */,
 				CC2183151953EF0B00918366 /* BusinessTableViewCell.xib in Resources */,
+				CC20ED5119567CE700323FBC /* checked.png in Resources */,
 				CC2182CA1952796B00918366 /* InfoPlist.strings in Resources */,
 				CC2182D21952796B00918366 /* Images.xcassets in Resources */,
 			);
