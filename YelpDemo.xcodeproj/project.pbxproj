@@ -17,6 +17,8 @@
 		CC20ED541956C04800323FBC /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = CC20ED531956C04800323FBC /* triangle.png */; };
 		CC20ED5719574B7900323FBC /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = CC20ED5619574B7900323FBC /* Filter.m */; };
 		CC20ED591957A14600323FBC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC20ED581957A14600323FBC /* CoreLocation.framework */; };
+		CC20ED5B19580D9F00323FBC /* YelpDemo.gif in Resources */ = {isa = PBXBuildFile; fileRef = CC20ED5A19580D9F00323FBC /* YelpDemo.gif */; };
+		CC20ED5D19580DC400323FBC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CC20ED5C19580DC400323FBC /* README.md */; };
 		CC2182C01952796B00918366 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182BF1952796B00918366 /* Foundation.framework */; };
 		CC2182C21952796B00918366 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182C11952796B00918366 /* CoreGraphics.framework */; };
 		CC2182C41952796B00918366 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182C31952796B00918366 /* UIKit.framework */; };
@@ -69,6 +71,8 @@
 		CC20ED5519574B7900323FBC /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filter.h; sourceTree = "<group>"; };
 		CC20ED5619574B7900323FBC /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filter.m; sourceTree = "<group>"; };
 		CC20ED581957A14600323FBC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CC20ED5A19580D9F00323FBC /* YelpDemo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = YelpDemo.gif; sourceTree = "<group>"; };
+		CC20ED5C19580DC400323FBC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		CC2182BC1952796B00918366 /* YelpDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YelpDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2182BF1952796B00918366 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CC2182C11952796B00918366 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -154,6 +158,8 @@
 		CC2182B31952796B00918366 = {
 			isa = PBXGroup;
 			children = (
+				CC20ED5C19580DC400323FBC /* README.md */,
+				CC20ED5A19580D9F00323FBC /* YelpDemo.gif */,
 				CC20ED4E19567CE700323FBC /* images */,
 				CC2182C51952796B00918366 /* YelpDemo */,
 				CC2182DE1952796C00918366 /* YelpDemoTests */,
@@ -350,7 +356,9 @@
 				CC20ED541956C04800323FBC /* triangle.png in Resources */,
 				CC2183151953EF0B00918366 /* BusinessTableViewCell.xib in Resources */,
 				CC20ED5119567CE700323FBC /* checked.png in Resources */,
+				CC20ED5B19580D9F00323FBC /* YelpDemo.gif in Resources */,
 				CC2182CA1952796B00918366 /* InfoPlist.strings in Resources */,
+				CC20ED5D19580DC400323FBC /* README.md in Resources */,
 				CC2182D21952796B00918366 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
