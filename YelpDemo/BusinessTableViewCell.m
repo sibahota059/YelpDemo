@@ -46,6 +46,18 @@
     self.businessName.text = businessName;
     [self.ratingsImageView setImageWithURL:[NSURL URLWithString:business.ratingImageURL]];
     
+    self.businessImageView.layer.shadowColor = [[UIColor grayColor] CGColor];
+    self.businessImageView.layer.shadowRadius = 5.0;
+    self.businessImageView.layer.shadowOpacity = 1.0;
+    self.businessImageView.layer.shadowOffset = CGSizeMake(0, 0);
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.businessImageView.bounds cornerRadius:5.0];
+    self.businessImageView.layer.shadowPath = path.CGPath;
+    self.businessImageView.layer.cornerRadius = 5.0;
+    self.businessImageView.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.businessImageView.layer.borderWidth = 1.0;
+    self.businessImageView.layer.masksToBounds = YES;
+    
+    
     NSMutableString *reviews = [NSMutableString stringWithFormat:@"%d reviews",business.reviewCount];
     self.reviewsLabel.text = reviews;
     
