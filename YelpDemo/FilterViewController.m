@@ -632,12 +632,12 @@
 }
 
 -(UISegmentedControl*) addPriceSegmentedControl {
-    CGFloat segmentWidth = 70;
-    //CGFloat segmentHeight = 40;
+    CGFloat segmentWidth = 74.8;
+    CGFloat segmentHeight = 39.1;
     
     UISegmentedControl *sharingSegmentControl = [[UISegmentedControl alloc] initWithItems:@[@"$", @"$$", @"$$$", @"$$$$"]];
     //[sharingSegmentControl setApportionsSegmentWidthsByContent:YES];
-    //sharingSegmentControl.frame = CGRectMake(0, 0, sharingSegmentControl.numberOfSegments * segmentWidth, segmentHeight);
+    sharingSegmentControl.frame = CGRectMake(0, 0, sharingSegmentControl.numberOfSegments * segmentWidth, segmentHeight);
     for (int i = 0; i < sharingSegmentControl.numberOfSegments; i++) {
         [sharingSegmentControl setWidth:segmentWidth forSegmentAtIndex:i];
         //[sharingSegmentControl setTitle:arr[i] forSegmentAtIndex:i];
@@ -729,6 +729,10 @@
     NSString *prevSearchTerm = [self.filterModel searchTerm];
     self.filterModel = [[Filter alloc] init];
     [self.filterModel setSearchTerm:prevSearchTerm];
+    self.filterModel.distance = self.distanceValues[0][@"value"];
+    self.filterModel.sortBy = [NSString stringWithFormat:@"%d",0];
+    
+    
     for(id vc in [[self navigationController] childViewControllers]){
         
         if([vc isKindOfClass:[YelpHomeViewController class]]){
