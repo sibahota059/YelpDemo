@@ -233,7 +233,9 @@
         [cell.switchControl setTag:10];
         
         cell.radioButtonImageView.hidden = YES;
-        
+        cell.layer.borderColor = [[UIColor colorWithRed:201/255.0f green:200/255.0f blue:197/255.0f alpha:1.0f] CGColor];
+        cell.layer.borderWidth = 1.0;
+        cell.layer.masksToBounds = YES;
         return cell;
         
     }else if(indexPath.section == 2){
@@ -380,6 +382,9 @@
                 break;
             }
         }
+        cell.layer.borderColor = [[UIColor colorWithRed:201/255.0f green:200/255.0f blue:197/255.0f alpha:1.0f] CGColor];
+        cell.layer.borderWidth = 1.0;
+        cell.layer.masksToBounds = YES;
         return cell;
         
     }else if(indexPath.section == 3){
@@ -499,6 +504,9 @@
                     break;
             }
         }
+        cell.layer.borderColor = [[UIColor colorWithRed:201/255.0f green:200/255.0f blue:197/255.0f alpha:1.0f] CGColor];
+        cell.layer.borderWidth = 1.0;
+        cell.layer.masksToBounds = YES;
         return cell;
         
     }else if(indexPath.section == 4){
@@ -547,7 +555,9 @@
             cell.radioButtonImageView.hidden = YES;
             cell.switchControl.tag = indexPath.row + 40;
         }
-        
+        cell.layer.borderColor = [[UIColor colorWithRed:201/255.0f green:200/255.0f blue:197/255.0f alpha:1.0f] CGColor];
+        cell.layer.borderWidth = 1.0;
+        cell.layer.masksToBounds = YES;
         return cell;
         
     }else{
