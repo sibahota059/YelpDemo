@@ -22,6 +22,7 @@
     self.crossStreets = data[@"country_code"];
     self.neighborhoods = [NSArray arrayWithArray:data[@"neighborhoods"]];
     self.displayAddress = [[Address alloc] initWithFullAddressArray:data[@"display_address"]];
+    self.coordinate = [[Center alloc] initWithDictionary:data[@"coordinate"]];
     
     return self;
 }

@@ -7,6 +7,7 @@
 //
 
 #import "YelpClient.h"
+#import <CoreLocation/CoreLocation.h>
 
 @implementation YelpClient
 
@@ -22,10 +23,30 @@
 
 - (AFHTTPRequestOperation *)searchWithTerm:(NSString *)term success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     
-    // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
-    NSDictionary *parameters = @{@"term": term, @"location" : @"San Francisco"};
+    NSDictionary *parameters = @{@"term": term, @"location" : @"San Jose", @"cll" : [NSString stringWithFormat:@"%f,%f",
+                                                                                     CONST_LATITUDE,
+                                                                                     CONST_LONGITUDE]};
     
     return [self GET:@"search" parameters:parameters success:success failure:failure];
+}
+
+
+- (AFHTTPRequestOperation *)searchWithTerm:(NSString *)term parameters:(NSDictionary*) params success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    
+//    NSDictionary *parameters = @{@"term": term, @"location" : @"San Jose", @"cll" : [NSString stringWithFormat:@"%f,%f",
+//                                                                                     CONST_LATITUDE,
+//                                                                                     CONST_LONGITUDE]};
+    
+    return [self GET:@"search" parameters:params success:success failure:failure];
+}
+
++(double) getDistanceBetweenTwoLocationsLatitude1: (double) lat1 Longitude1: (double) long1 Latitude2: (double) lat2 Longitude2: (double) long2 {
+    
+    CLLocation *locA = [[CLLocation alloc] initWithLatitude:lat1 longitude:long1];
+    CLLocation *locB = [[CLLocation alloc] initWithLatitude:lat2 longitude:long2];
+    CLLocationDistance distance = [locA distanceFromLocation:locB];
+    NSLog(@"distance -> %f", distance/1610);
+    return distance;
 }
 
 @end

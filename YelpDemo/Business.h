@@ -22,7 +22,7 @@
 @property NSString *displayPhone;
 @property int reviewCount;
 @property NSArray *categories;
-@property float distance;
+@property double distance;
 @property float rating;
 @property NSString *ratingImageURL;
 @property NSString *ratingImageURLLarge;

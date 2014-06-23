@@ -10,6 +10,7 @@
 #import "Business.h"
 #import "UIImageView+AFNetworking.h"
 #import "BusinessCategory.h"
+#import "YelpClient.h"
 
 @interface BusinessTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *businessImageView;
@@ -53,7 +54,9 @@
         address = [NSMutableString stringWithString:business.location.displayAddress.addressLineOne];
         [address appendString:@", "];
         
-        if(business.location.displayAddress.addressLineTwo){
+        if(business.location.displayAddress.addressLineThree){
+            [address appendString:business.location.displayAddress.addressLineThree];
+        }else if(business.location.displayAddress.addressLineTwo){
             [address appendString:business.location.displayAddress.addressLineTwo];
         }
     }else{
@@ -63,18 +66,29 @@
     self.addressLabel.text = address;
     
     //need to specify latitude & longitude to get distance
-    self.distance.text = [NSString stringWithFormat:@"%0.2f mi",business.distance];
+    
+    if(business.location.coordinate.latitude && business.location.coordinate.longitude){
+        
+//        NSLog(@"const lat -> %f", CONST_LATITUDE);
+//        NSLog(@"const long -> %f", CONST_LONGITUDE);
+//        
+//        NSLog(@"rest lat -> %f", business.location.coordinate.latitude);
+//        NSLog(@"rest long -> %f", business.location.coordinate.longitude);
+        
+        business.distance = [YelpClient getDistanceBetweenTwoLocationsLatitude1:CONST_LATITUDE Longitude1:CONST_LONGITUDE Latitude2:business.location.coordinate.latitude Longitude2:business.location.coordinate.longitude];
+        NSLog(@"got distance for business -> %@ as %f miles",business.name, business.distance/1609.344);
+    }
+    
+    self.distance.text = [NSString stringWithFormat:@"%0.2f mi",business.distance/1609.344];
     
     if(business.categories){
         
-        NSMutableString *categories;
+        NSMutableString *categories = [[NSMutableString alloc]init];
         
         for (int i = 0; i < business.categories.count; i++) {
             
             BusinessCategory *category = [business.categories objectAtIndex:i];
-            
-            categories = [NSMutableString stringWithString:[category categoryName]];
-            
+            [categories appendString:[category categoryName]];
             [categories appendString:@", "];
         }
         

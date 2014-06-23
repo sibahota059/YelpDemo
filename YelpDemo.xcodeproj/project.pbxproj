@@ -15,6 +15,8 @@
 		CC20ED5119567CE700323FBC /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = CC20ED4F19567CE700323FBC /* checked.png */; };
 		CC20ED5219567CE700323FBC /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = CC20ED5019567CE700323FBC /* unchecked.png */; };
 		CC20ED541956C04800323FBC /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = CC20ED531956C04800323FBC /* triangle.png */; };
+		CC20ED5719574B7900323FBC /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = CC20ED5619574B7900323FBC /* Filter.m */; };
+		CC20ED591957A14600323FBC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC20ED581957A14600323FBC /* CoreLocation.framework */; };
 		CC2182C01952796B00918366 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182BF1952796B00918366 /* Foundation.framework */; };
 		CC2182C21952796B00918366 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182C11952796B00918366 /* CoreGraphics.framework */; };
 		CC2182C41952796B00918366 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2182C31952796B00918366 /* UIKit.framework */; };
@@ -64,6 +66,9 @@
 		CC20ED4F19567CE700323FBC /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		CC20ED5019567CE700323FBC /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
 		CC20ED531956C04800323FBC /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
+		CC20ED5519574B7900323FBC /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filter.h; sourceTree = "<group>"; };
+		CC20ED5619574B7900323FBC /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filter.m; sourceTree = "<group>"; };
+		CC20ED581957A14600323FBC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CC2182BC1952796B00918366 /* YelpDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YelpDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2182BF1952796B00918366 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CC2182C11952796B00918366 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -113,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC20ED591957A14600323FBC /* CoreLocation.framework in Frameworks */,
 				CC2182EF19527A8A00918366 /* SystemConfiguration.framework in Frameworks */,
 				CC2182C21952796B00918366 /* CoreGraphics.framework in Frameworks */,
 				CC2182C41952796B00918366 /* UIKit.framework in Frameworks */,
@@ -169,6 +175,7 @@
 		CC2182BE1952796B00918366 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC20ED581957A14600323FBC /* CoreLocation.framework */,
 				CC2182EE19527A8A00918366 /* SystemConfiguration.framework */,
 				CC2182BF1952796B00918366 /* Foundation.framework */,
 				CC2182C11952796B00918366 /* CoreGraphics.framework */,
@@ -237,6 +244,8 @@
 		CC2182F81952890900918366 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				CC20ED5519574B7900323FBC /* Filter.h */,
+				CC20ED5619574B7900323FBC /* Filter.m */,
 				CC2182F919528A2E00918366 /* SearchAPIResponse.h */,
 				CC2182FA19528A2E00918366 /* SearchAPIResponse.m */,
 				CC2182FC19528B6100918366 /* Business.h */,
@@ -403,6 +412,7 @@
 				CC218307195290EE00918366 /* Span.m in Sources */,
 				CC21830A1952910200918366 /* Center.m in Sources */,
 				CC2183101953E62D00918366 /* Address.m in Sources */,
+				CC20ED5719574B7900323FBC /* Filter.m in Sources */,
 				CC2182F319527B0D00918366 /* YelpHomeViewController.m in Sources */,
 				CC2182FE19528B6100918366 /* Business.m in Sources */,
 				CC2182D01952796B00918366 /* AppDelegate.m in Sources */,

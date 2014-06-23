@@ -28,7 +28,7 @@
     self.displayPhone = data[@"display_phone"];
     self.reviewCount = [data[@"review_count"] integerValue];
     
-    NSMutableArray* mutableCategoriesList = [[ NSMutableArray alloc ] initWithCapacity: 1];
+    NSMutableArray* mutableCategoriesList = [[ NSMutableArray alloc ] initWithCapacity: 2];
     BusinessCategory *category;
     for(id cat in [data valueForKey:@"categories"]){
         
@@ -44,8 +44,6 @@
     self.location = [[Location alloc] initWithDictionary:data[@"location"]];
     self.menuProvider = data[@"menu_provider"];
     self.menuDateUpdated = [data[@"menu_date_updated"] longValue];
-    
-    
     
     return self;
 

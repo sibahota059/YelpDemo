@@ -13,6 +13,7 @@
 #import "Business.h"
 #import "BusinessTableViewCell.h"
 #import "FilterViewController.h"
+#import "Filter.h"
 
 NSString * const kYelpConsumerKey = @"vxKwwcR_NMQ7WaEiQBK_CA";
 NSString * const kYelpConsumerSecret = @"33QCvh5bIF5jIHR5klQr7RtBDhQ";
@@ -76,7 +77,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 10;
+    return self.searchResponse.businesses.count;
 }
 
 
@@ -93,21 +94,38 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     
     NSLog(@"User searched for %@", searchBar.text);
     [searchBar resignFirstResponder];
-    [self callYelpSearch:searchBar.text];
+    self.filterModel = [[Filter alloc] init];
+    [self.filterModel setSearchTerm:searchBar.text];
+    [self callYelpSearch:searchBar.text parameters:nil];
 }
 
--(void) callYelpSearch: (NSString*) searchTerm{
+-(void) callYelpSearch: (NSString*)searchTerm parameters: (NSDictionary*) params{
     
+    if(params){
+     
+        [self.client searchWithTerm:searchTerm parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+            
+            self.searchResponse = [[SearchAPIResponse alloc] initWithDictionary:response];
+            //NSLog(@"response: %@",response);
+            
+            [self.businessesTableView reloadData];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"error: %@", [error description]);
+        }];
+
+    }else{
     
     [self.client searchWithTerm:searchTerm success:^(AFHTTPRequestOperation *operation, id response) {
 
+        NSLog(@"response: %@",response);
         self.searchResponse = [[SearchAPIResponse alloc] initWithDictionary:response];
-        
         [self.businessesTableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error: %@", [error description]);
     }];
+    }
 
 }
 
@@ -118,8 +136,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     // Dequeue or create a cell of the appropriate type.
     BusinessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    
-    if(self.searchResponse){
+    if(self.searchResponse && self.searchResponse.businesses.count > 0){
         cell = [cell initWithBusiness:self.searchResponse.businesses[indexPath.row] currentIndex:indexPath.row];
     }else{
         cell = [cell initWithBlank];
@@ -130,6 +147,20 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 - (IBAction)gotoFilterView:(UIButton *)sender {
     NSLog(@"Filter button clicked!");
     FilterViewController *filtervc = [[FilterViewController alloc] init];
+    
+    if(!self.filterModel){
+        self.filterModel = [[Filter alloc]init];
+    }
+    
+    self.filterModel.categories = [[NSMutableDictionary alloc]init];
+    self.filterModel.mostPopular = [[NSMutableDictionary alloc]init];
+    
+    if(!self.filterModel.searchTerm){
+        [self.filterModel setSearchTerm:@"restaurants"];
+    }
+    
+    
+    [filtervc setFilterModel:self.filterModel];
     [self.navigationController pushViewController:filtervc animated:YES];
 }
 
@@ -147,7 +178,65 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     [self addFilterButton];
     
     [self.businessesTableView registerNib:[UINib nibWithNibName:@"BusinessTableViewCell" bundle:nil] forCellReuseIdentifier:@"BusinessTableViewCell"];
+    
+    
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    if(self.filterModel){
+        
+        NSLog(@"coming back from filter screen with values: ");
+        NSLog(@"filter distance: %@", self.filterModel.distance);
+        NSLog(@"filter sort by: %@", self.filterModel.sortBy);
+        NSLog(@"filter categories: %@", self.filterModel.categories);
+        NSLog(@"filter deals: %d", self.filterModel.offersADeal);
+        
+        NSMutableDictionary *newParams = [[NSMutableDictionary alloc] init];
+        [newParams setObject:self.filterModel.searchTerm forKey:@"term"];
+        [newParams setObject:@"San Jose" forKey:@"location"];
+        [newParams setObject:[NSString stringWithFormat:@"%f,%f",
+                              CONST_LATITUDE,
+                              CONST_LONGITUDE] forKey:@"cll"];
+        
+        [newParams setObject:self.filterModel.distance forKey:@"radius_filter"];
+        
+        if(self.filterModel.offersADeal == YES){
+            
+            [newParams setObject:@"true" forKey:@"deals_filter"];
+        }
+        
+        
+        if(self.filterModel.categories && self.filterModel.categories.count > 0){
+            
+            NSMutableString *catFilter = [[NSMutableString alloc] init];
+            
+            NSEnumerator *enumerator = [self.filterModel.categories keyEnumerator];
+            id key;
+            while((key = [enumerator nextObject])){
+                [catFilter appendString: key];
+                [catFilter appendString:@","];
+            }
+            
+            NSRange range = NSMakeRange(0, catFilter.length - 1);
+            [newParams setObject:[catFilter substringWithRange:range] forKey:@"category_filter"];
+        }
+        
+        [newParams setObject:self.filterModel.sortBy forKey:@"sort"];
+        
+        
+        
+        NSLog(@"calling yelp api with there new params: %@", newParams);
+        
+        [self callYelpSearch:@"restaurants" parameters:newParams];
+        
+        
+    }else{
+        NSLog(@"oops! came back with no values");
+        
+        [self callYelpSearch:@"restaurants" parameters:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning

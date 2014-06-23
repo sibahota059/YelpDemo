@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Address.h"
+#import "Center.h"
 
 @interface Location : NSObject
 
@@ -19,6 +20,7 @@
 @property NSString *countryCode;
 @property NSString *crossStreets;
 @property NSArray *neighborhoods;
+@property Center *coordinate;
 
 -(id) initWithDictionary: (NSDictionary*) data;
 

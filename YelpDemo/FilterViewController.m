@@ -8,6 +8,7 @@
 
 #import "FilterViewController.h"
 #import "FilterTableViewCell.h"
+#import "YelpHomeViewController.h"
 
 @interface FilterViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *filterTableView;
@@ -21,6 +22,63 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.categoryValues = @[
+                              @{@"name": @"American (New)", @"value": @"newamerican"},
+                              @{@"name": @"American (Traditional)", @"value": @"tradamerican"},
+                              @{@"name": @"Argentine", @"value": @"argentine"},
+                              @{@"name": @"Asian Fusion", @"value": @"asianfusion"},
+                              @{@"name": @"Australian", @"value": @"australian"},
+                              @{@"name": @"Austrian", @"value": @"austrian"},
+                              @{@"name": @"Beer Garden", @"value": @"beergarden"},
+                              @{@"name": @"Belgian", @"value": @"belgian"},
+                              @{@"name": @"Brazilian", @"value": @"brazilian"},
+                              @{@"name": @"Breakfast & Brunch", @"value": @"breakfast_brunch"},
+                              @{@"name": @"Buffets", @"value": @"buffets"},
+                              @{@"name": @"Burgers", @"value": @"burgers"},
+                              @{@"name": @"Burmese", @"value": @"burmese"},
+                              @{@"name": @"Cafes", @"value": @"cafes"}
+//                              ,
+//                              @{@"name": @"Cajun/Creole", @"value": @"cajun"},
+//                              @{@"name": @"Canadian", @"value": @"newcanadian"},
+//                              @{@"name": @"Chinese", @"value": @"chinese"},
+//                              @{@"name": @"Cantonese", @"value": @"cantonese"},
+//                              @{@"name": @"Dim Sum", @"value": @"dimsum"},
+//                              @{@"name": @"Cuban", @"value": @"cuban"},
+//                              @{@"name": @"Diners", @"value": @"diners"},
+//                              @{@"name": @"Dumplings", @"value": @"dumplings"},
+//                              @{@"name": @"Ethiopian", @"value": @"ethiopian"},
+//                              @{@"name": @"Fast Food", @"value": @"hotdogs"},
+//                              @{@"name": @"French", @"value": @"french"},
+//                              @{@"name": @"German", @"value": @"german"},
+//                              @{@"name": @"Greek", @"value": @"greek"},
+//                              @{@"name": @"Indian", @"value": @"indpak"},
+//                              @{@"name": @"Indonesian", @"value": @"indonesian"},
+//                              @{@"name": @"Irish", @"value": @"irish"},
+//                              @{@"name": @"Italian", @"value": @"italian"},
+//                              @{@"name": @"Japanese", @"value": @"japanese"},
+//                              @{@"name": @"Jewish", @"value": @"jewish"},
+//                              @{@"name": @"Korean", @"value": @"korean"},
+//                              @{@"name": @"Venezuelan", @"value": @"venezuelan"},
+//                              @{@"name": @"Malaysian", @"value": @"malaysian"},
+//                              @{@"name": @"Pizza", @"value": @"pizza"},
+//                              @{@"name": @"Russian", @"value": @"russian"},
+//                              @{@"name": @"Salad", @"value": @"salad"},
+//                              @{@"name": @"Scandinavian", @"value": @"scandinavian"},
+//                              @{@"name": @"Seafood", @"value": @"seafood"},
+//                              @{@"name": @"Turkish", @"value": @"turkish"},
+//                              @{@"name": @"Vegan", @"value": @"vegan"},
+//                              @{@"name": @"Vegetarian", @"value": @"vegetarian"},
+//                              @{@"name": @"Vietnamese", @"value": @"vietnamese"}
+                              ];
+        
+        self.distanceValues = @[@{@"name": @"Auto", @"value": @"16094"},
+                                @{@"name": @"0.3 mile", @"value": @"483"},
+                                @{@"name": @"1 mile", @"value": @"1609"},
+                                @{@"name": @"5 miles", @"value": @"8047"},
+                                @{@"name": @"20 miles", @"value": @"32187"}];
+        
+        self.mostPopularValues = @[@{@"name":@"Offering a Deal", @"value":@"deals"}
+                                 ];
     }
     return self;
 }
@@ -47,8 +105,11 @@
     
     [self.sectionStatus setObject:@"collapsed" forKey:@"2"];
     [self.sectionStatus setObject:@"collapsed" forKey:@"3"];
+    [self.sectionStatus setObject:@"collapsed" forKey:@"4"];
     [self.sectionStatus setObject:@"selectedSortBy" forKey:@"-1"];
     [self.sectionStatus setObject:@"selectedDistance" forKey:@"-1"];
+    
+    [self.filterModel setOffersADeal:NO];
     
     //[self.filterTableView reloadData];
 
@@ -100,62 +161,78 @@
         [cell.switchControl addTarget:self
                                action:@selector(switchControlValueChanged:) forControlEvents:UIControlEventValueChanged];
         
-        switch (indexPath.row) {
-            case 0:
-            {
-
-                cell.filterTypeLabel.text = @"Open Now";
-                
-                NSDate *currTime = [NSDate date];
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"h:mm a"];
-                cell.timeLabel.text = [dateFormatter stringFromDate:currTime];
-                [cell.timeLabel.layer setBorderColor:[UIColor grayColor].CGColor];
-                [cell.timeLabel.layer setBorderWidth:0.5f];
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:10];
-                
-                cell.radioButtonImageView.hidden = YES;
-               
-            }
-                break;
-                
-            case 1:
-            {
-                cell.filterTypeLabel.text = @"Hot & New";
-                cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:11];
-                
-                cell.radioButtonImageView.hidden = YES;
-            }
-                break;
-
-            case 2:
-            {
-                cell.filterTypeLabel.text = @"Offering a Deal";
-                cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:12];
-                
-                cell.radioButtonImageView.hidden = YES;
-            }
-                break;
-                
-            case 3:
-            {
-                cell.filterTypeLabel.text = @"Delivery";
-                cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:13];
-                
-                cell.radioButtonImageView.hidden = YES;
-            }
-                break;
-                
-            default:
-                break;
+//        switch (indexPath.row) {
+//            case 0:
+//            {
+//
+//                cell.filterTypeLabel.text = @"Open Now";
+//                
+//                NSDate *currTime = [NSDate date];
+//                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//                [dateFormatter setDateFormat:@"h:mm a"];
+//                cell.timeLabel.text = [dateFormatter stringFromDate:currTime];
+//                [cell.timeLabel.layer setBorderColor:[UIColor grayColor].CGColor];
+//                [cell.timeLabel.layer setBorderWidth:0.5f];
+//                [cell.switchControl setOn:NO animated:NO];
+//                [cell.switchControl setTag:10];
+//                
+//                cell.radioButtonImageView.hidden = YES;
+//               
+//            }
+//                break;
+//                
+//            case 1:
+//            {
+//                cell.filterTypeLabel.text = @"Hot & New";
+//                cell.timeLabel.hidden = YES;
+//                [cell.switchControl setOn:NO animated:NO];
+//                [cell.switchControl setTag:11];
+//                
+//                cell.radioButtonImageView.hidden = YES;
+//            }
+//                break;
+//
+//            case 2:
+//            {
+//                cell.filterTypeLabel.text = @"Offering a Deal";
+//                cell.timeLabel.hidden = YES;
+//                [cell.switchControl setOn:NO animated:NO];
+//                [cell.switchControl setTag:12];
+//                
+//                cell.radioButtonImageView.hidden = YES;
+//            }
+//                break;
+//                
+//            case 3:
+//            {
+//                cell.filterTypeLabel.text = @"Delivery";
+//                cell.timeLabel.hidden = YES;
+//                [cell.switchControl setOn:NO animated:NO];
+//                [cell.switchControl setTag:13];
+//                
+//                cell.radioButtonImageView.hidden = YES;
+//            }
+//                break;
+//                
+//            default:
+//                break;
+//        }
+        
+        cell.filterTypeLabel.text = @"Offering a Deal";
+        cell.timeLabel.hidden = YES;
+        
+        
+        
+        if([(NSString*)[self.filterModel.categories objectForKey:[NSString stringWithFormat:@"%d",indexPath.section * 10 + indexPath.row]] isEqualToString:@"Y"]){
+                [cell.switchControl setOn:YES animated:NO];
+        }else{
+            [cell.switchControl setOn:NO animated:NO];
         }
+        
+        
+        [cell.switchControl setTag:10];
+        
+        cell.radioButtonImageView.hidden = YES;
         
         return cell;
         
@@ -163,9 +240,9 @@
         
         FilterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterTableViewCell"];
         
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(distanceTapped:)];
-        singleTap.numberOfTapsRequired = 1;
-        singleTap.numberOfTouchesRequired = 1;
+//        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(distanceTapped:)];
+//        singleTap.numberOfTapsRequired = 1;
+//        singleTap.numberOfTouchesRequired = 1;
         
         if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]] isEqualToString:@"collapsed"]){
             
@@ -195,6 +272,8 @@
                     [cell.radioButtonImageView setTag:24];
                     break;
                 default:
+                    cell.filterTypeLabel.text = @"Auto";
+                    [cell.radioButtonImageView setTag:20];
                     break;
             }
             
@@ -239,8 +318,7 @@
                     cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
                 }
                 [cell.radioButtonImageView setTag:21];
-                [cell.radioButtonImageView addGestureRecognizer:singleTap];
-                [cell.radioButtonImageView setUserInteractionEnabled:YES];
+
             }
                 break;
                 
@@ -258,8 +336,7 @@
                     cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
                 }
                 [cell.radioButtonImageView setTag:22];
-                [cell.radioButtonImageView addGestureRecognizer:singleTap];
-                [cell.radioButtonImageView setUserInteractionEnabled:YES];
+                
             }
                 break;
                 
@@ -277,8 +354,7 @@
                     cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
                 }
                 [cell.radioButtonImageView setTag:23];
-                [cell.radioButtonImageView addGestureRecognizer:singleTap];
-                [cell.radioButtonImageView setUserInteractionEnabled:YES];
+                
             }
                 break;
             
@@ -310,11 +386,6 @@
         
         FilterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterTableViewCell"];
         
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sortByTapped:)];
-        
-        singleTap.numberOfTapsRequired = 1;
-        singleTap.numberOfTouchesRequired = 1;
-        
         if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]] isEqualToString:@"collapsed"]){
             
             cell.timeLabel.hidden = YES;
@@ -340,15 +411,14 @@
                     break;
                     
                 default:
+                    cell.filterTypeLabel.text = @"Best Match";
+                    [cell.radioButtonImageView setTag:30];
                     break;
             }
             
             cell.radioButtonImageView.image = [UIImage imageNamed:@"triangle.png"];
-            //[cell.radioButtonImageView addGestureRecognizer:singleTap];
-            //[cell.radioButtonImageView setUserInteractionEnabled:YES];
             
-            
-        }else{
+        }else {
             switch (indexPath.row) {
                     
                 case 0:
@@ -366,8 +436,7 @@
                     }
                     
                     [cell.radioButtonImageView setTag:30];
-                    [cell.radioButtonImageView addGestureRecognizer:singleTap];
-                    [cell.radioButtonImageView setUserInteractionEnabled:YES];
+                    
                 }
                     break;
                     
@@ -385,8 +454,7 @@
                         cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
                     }
                     [cell.radioButtonImageView setTag:31];
-                    [cell.radioButtonImageView addGestureRecognizer:singleTap];
-                    [cell.radioButtonImageView setUserInteractionEnabled:YES];
+                   
                 }
                     break;
                     
@@ -404,8 +472,7 @@
                         cell.radioButtonImageView.image = [UIImage imageNamed:@"unchecked.png"];
                     }
                     [cell.radioButtonImageView setTag:32];
-                    [cell.radioButtonImageView addGestureRecognizer:singleTap];
-                    [cell.radioButtonImageView setUserInteractionEnabled:YES];
+                   
                 }
                     break;
                     
@@ -424,8 +491,7 @@
                     }
                     
                     [cell.radioButtonImageView setTag:33];
-                    [cell.radioButtonImageView addGestureRecognizer:singleTap];
-                    [cell.radioButtonImageView setUserInteractionEnabled:YES];
+                   
                 }
                     break;
                     
@@ -433,131 +499,103 @@
                     break;
             }
         }
-        
-        
-        
         return cell;
         
-    }else {
+    }else if(indexPath.section == 4){
         
         FilterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterTableViewCell"];
         [cell.switchControl addTarget:self
                                action:@selector(switchControlValueChanged:) forControlEvents:UIControlEventValueChanged];
-        
-        switch (indexPath.row) {
+
+        if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]] isEqualToString:@"collapsed"]){
+            
+            if(indexPath.row < 4){
                 
-            case 0:
-            {
-                cell.filterTypeLabel.text = @"Take-out";
+                cell.filterTypeLabel.text = self.categoryValues[indexPath.row][@"name"];
                 cell.timeLabel.hidden = YES;
+                cell.switchControl.hidden = NO;
+                if([[self.filterModel categories] objectForKey:self.categoryValues[indexPath.row][@"value"]]){
+                    [cell.switchControl setOn:YES animated:NO];
+                }else{
+                    [cell.switchControl setOn:NO animated:NO];
+                }
+                cell.radioButtonImageView.hidden = YES;
+                cell.switchControl.tag = indexPath.row + 40;
+                
+            } else if(indexPath.row == 4){
+                
+                cell.filterTypeLabel.text = @"see more";
+                cell.timeLabel.hidden = YES;
+                cell.switchControl.hidden = NO;
                 [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:40];
+                cell.switchControl.hidden = YES;
                 cell.radioButtonImageView.hidden = YES;
             }
-                break;
-                
-            case 1:
-            {
-                cell.filterTypeLabel.text = @"Good for Groups";
-                cell.timeLabel.hidden = YES;
+        }else{
+         
+            cell.filterTypeLabel.text = self.categoryValues[indexPath.row][@"name"];
+            cell.timeLabel.hidden = YES;
+            cell.switchControl.hidden = NO;
+            
+            if([[self.filterModel categories] objectForKey:self.categoryValues[indexPath.row][@"value"]]){
+                [cell.switchControl setOn:YES animated:NO];
+            }else{
                 [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:41];
-                cell.radioButtonImageView.hidden = YES;
             }
-                break;
-                
-            case 2:
-            {
-                cell.filterTypeLabel.text = @"Takes Reservations";
-                cell.timeLabel.hidden = YES;
-                [cell.switchControl setOn:NO animated:NO];
-                [cell.switchControl setTag:42];
-                cell.radioButtonImageView.hidden = YES;
-            }
-                break;
-                
-            default:
-                break;
+            
+            
+            cell.radioButtonImageView.hidden = YES;
+            cell.switchControl.tag = indexPath.row + 40;
         }
         
         return cell;
         
+    }else{
+        
+        NSLog(@"wrong place alert!");
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"someId"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"someId"];
+        }
+        
+        return cell;
     }
    
-}
-
-- (void)distanceTapped :(UIGestureRecognizer *)gestureRecognizer {
-
-    UIImageView *selectedView = (UIImageView*)[gestureRecognizer view];
-    int row = [selectedView tag] % 10;
-    
-    switch (row) {
-        case 0:
-            NSLog(@"Auto");//16100 - 10 miles?
-            break;
-        case 1:
-            NSLog(@"0.3 mile");//20
-            break;
-        case 2:
-            NSLog(@"1 mile");//1610
-            break;
-        case 3:
-            NSLog(@"5 miles");//8047
-            break;
-        case 4:
-            NSLog(@"20 miles");//32187
-            break;
-        default:
-            break;
-    }
-    
-    [self.sectionStatus setObject:[NSString stringWithFormat:@"%d",[selectedView tag]] forKey:@"selectedDistance"];
-    [self.sectionStatus setObject:@"collapsed" forKey:[NSString stringWithFormat:@"%d",[selectedView tag] / 10]];
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[selectedView tag] / 10];
-    [self.filterTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-    
-}
-
-- (void) sortByTapped :(UIGestureRecognizer *)gestureRecognizer {
-    
-    UIImageView *selectedView = (UIImageView*)[gestureRecognizer view];
-    int row = [selectedView tag] % 10;
-    
-    switch (row) {
-        case 0:
-            NSLog(@"best match");
-            break;
-        case 1:
-            NSLog(@"distance");
-            break;
-        case 2:
-            NSLog(@"rating");
-            break;
-        case 3:
-            NSLog(@"most reviewed");
-            break;
-        default:
-            break;
-    }
-    
-        [self.sectionStatus setObject:[NSString stringWithFormat:@"%d",[selectedView tag]] forKey:@"selectedSortBy"];
-        [self.sectionStatus setObject:@"collapsed" forKey:[NSString stringWithFormat:@"%d",[selectedView tag] / 10]];
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[selectedView tag] / 10];
-        [self.filterTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]] isEqualToString:@"collapsed"]){
+    if(indexPath.section != 4){
+        
+        if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]] isEqualToString:@"collapsed"]){
+            
+            [self.sectionStatus setObject:@"expanded" forKey:[NSString stringWithFormat:@"%d",indexPath.section]];
+            
+        }else{
+            
+            [self.sectionStatus setObject:@"collapsed" forKey:[NSString stringWithFormat:@"%d",indexPath.section]];
+        }
+    }
+    
+    if(indexPath.section == 2){
+        
+        FilterTableViewCell *cell = (FilterTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        [self.sectionStatus setObject:[NSString stringWithFormat:@"%d",[cell.radioButtonImageView tag]] forKey:@"selectedDistance"];
+        [self.filterModel setDistance:[self.distanceValues objectAtIndex:indexPath.row][@"value"]];
+        
+        
+    }else if(indexPath.section == 3){
+        
+        FilterTableViewCell *cell = (FilterTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        [self.sectionStatus setObject:[NSString stringWithFormat:@"%d",[cell.radioButtonImageView tag]] forKey:@"selectedSortBy"];
+        [self.filterModel setSortBy:[NSString stringWithFormat:@"%d",indexPath.row]];
+        
+    }else if(indexPath.section == 4 && indexPath.row == 4){
         
         [self.sectionStatus setObject:@"expanded" forKey:[NSString stringWithFormat:@"%d",indexPath.section]];
-       
-    }else{
-        
-        [self.sectionStatus setObject:@"collapsed" forKey:[NSString stringWithFormat:@"%d",indexPath.section]];
     }
     
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
@@ -569,14 +607,26 @@
     
     if([sender isOn]){
         
-        int selectedTag = [sender tag];
+        if([sender tag] < 40){
         
-        //NSLog(@"selected tag value: %d", selectedTag);
+            //most popular
+            int selectedTag = [sender tag];
+            //int section = selectedTag / 10;
+            int row = selectedTag % 10;
+            //NSLog(@"you selected section: %d row: %d", section, row);
+            
+            if(row == 0){
+                [self.filterModel setOffersADeal:YES];
+            }
+            //[[self.filterModel mostPopular] setObject:@"Y" forKey:[NSString stringWithFormat:@"%d",[sender tag]]];
+            
+        }else{
+            
+            //categories
+            //NSLog(@"you selected category: %@", [self.categoryValues objectAtIndex:[sender tag] - 40][@"value"]);
+            [[self.filterModel categories] setObject:[self.categoryValues objectAtIndex:[sender tag] - 40][@"value"] forKey:[self.categoryValues objectAtIndex:[sender tag] - 40][@"value"]];
+        }
         
-        int section = selectedTag / 10;
-        int row = selectedTag % 10;
-        
-        NSLog(@"you selected section: %d row: %d", section, row);
     }
     
 }
@@ -615,11 +665,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    if(indexPath.section == 1){
-//        return 40.0;
-//    }else{
-//        return 60.0;
-//    }
     return 40;
     
 }
@@ -639,7 +684,7 @@
     } else if (section==3) {
         return @"Sort by";
     } else if (section==4) {
-        return @"General Features";
+        return @"Categories";
     }
     return @" ";
 }
@@ -649,12 +694,12 @@
     if (section==0) {
         return 1;
     } else if (section==1) {
-        return 4;
+        //return 4;
+        return 1;
     } else if (section==2) {
         if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",section]] isEqualToString:@"collapsed"]){
             return 1;
         }else{
-            //NSLog(@"current status: %@", [self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",section]]);
             return 5;
         }
     } else if (section==3) {
@@ -666,7 +711,12 @@
         }
         
     } else if (section==4) {
-        return 3;
+        
+        if([[self.sectionStatus objectForKey:[NSString stringWithFormat:@"%d",section]] isEqualToString:@"collapsed"]){
+            return 5;
+        }else{
+            return self.categoryValues.count;
+        }
     }
     
     return 1;
@@ -675,11 +725,48 @@
 - (IBAction)cancelActionPerformed:(UIButton *)sender {
     
     NSLog(@"cancel button clicked!");
+    
+    NSString *prevSearchTerm = [self.filterModel searchTerm];
+    self.filterModel = [[Filter alloc] init];
+    [self.filterModel setSearchTerm:prevSearchTerm];
+    for(id vc in [[self navigationController] childViewControllers]){
+        
+        if([vc isKindOfClass:[YelpHomeViewController class]]){
+            
+            [(YelpHomeViewController*)vc setFilterModel:self.filterModel];
+            [self.navigationController popToViewController:vc animated:YES];
+        }
+    }
+    
 }
 
 - (IBAction)searchActionPerformed:(UIButton *)sender {
     
     NSLog(@"search button clicked!");
+    
+    if(!self.filterModel.distance){
+        self.filterModel.distance = self.distanceValues[0][@"value"];
+    }
+    
+    if(!self.filterModel.sortBy){
+        self.filterModel.sortBy = [NSString stringWithFormat:@"%d",0];
+    }
+   
+    
+    NSLog(@"filter distance: %@", self.filterModel.distance);
+    NSLog(@"filter sort by: %@", self.filterModel.sortBy);
+    NSLog(@"filter categories: %@", self.filterModel.categories);
+    NSLog(@"filter deals: %d", self.filterModel.offersADeal);
+    
+    for(id vc in [[self navigationController] childViewControllers]){
+        
+        if([vc isKindOfClass:[YelpHomeViewController class]]){
+            
+            [(YelpHomeViewController*)vc setFilterModel:self.filterModel];
+            [self.navigationController popToViewController:vc animated:YES];
+        }
+    }
+
 }
 
 - (void)didReceiveMemoryWarning

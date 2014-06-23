@@ -32,7 +32,10 @@
 -(id) initWithSingleAddressLine: (NSArray*) data{
     
     self = [super init];
-    self.addressLineOne = data[0];
+    if(data.count > 0){
+        self.addressLineOne = data[0];
+    }
+
     return self;
 }
 

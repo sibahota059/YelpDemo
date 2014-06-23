@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Filter.h"
 
 @interface FilterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong,nonatomic) NSArray *categoryValues;
+@property (strong, nonatomic) Filter *filterModel;
+@property (strong, nonatomic) NSArray *distanceValues;
+@property (strong, nonatomic) NSArray *mostPopularValues;
 
 @end
